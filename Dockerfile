@@ -26,6 +26,10 @@ RUN mkdir -p /src/TBuild
 WORKDIR /src/TBuild
 COPY third-party-deps.sh .
 RUN ./third-party-deps.sh && \
-    rm -rf Libraries && \
-    rm -rf tdesktop
-
+    find \( \
+         -name "*.o" -o \
+         -name "*.a" -o \
+         -name "*.so" -o \
+         -name "*.so.*" \
+        \) \
+            -exec rm {} \;
